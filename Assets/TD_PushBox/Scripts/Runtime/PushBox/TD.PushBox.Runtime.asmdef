@@ -1,0 +1,5 @@
+{
+  "name": "TD.PushBox.Runtime",
+  "rootNamespace": "TD.PushBox",
+  "references": ["Unity.InputSystem"]
+}

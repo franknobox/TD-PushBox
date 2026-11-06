@@ -1,0 +1,6 @@
+{
+  "name": "TD.PushBox.AuthoringTests",
+  "references": ["TD.PushBox.Board", "TD.PushBox.Editor", "TD.PushBox.Runtime", "TD.PushBox.Frontend", "Unity.ugui"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

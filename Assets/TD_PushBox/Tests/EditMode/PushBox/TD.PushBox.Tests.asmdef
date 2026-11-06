@@ -1,0 +1,6 @@
+{
+  "name": "TD.PushBox.Tests",
+  "references": ["TD.PushBox.Runtime"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

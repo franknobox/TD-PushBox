@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659551d39bb1fd74c8bf56f284e0cd78, type: 3}
+  m_Name: PushBoxPalette
+  m_EditorClassIdentifier: 
+  generateSupport: 1
+  supportMaterial: {fileID: 2100000, guid: 8841beee71e88e6429d0cab43c602171, type: 2}
+  supportDepth: 0.84
+  entries:
+  - label: "\u6DF1\u68D5"
+    category: 0
+    prefab: {fileID: 3643343903986826549, guid: b773342552ced8b459ae6280d4d16d89, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6D45\u68D5"
+    category: 0
+    prefab: {fileID: 9011420993851858897, guid: 2b9d7c3061ffffa44aa97d89d9c10a3d, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6D45\u7070"
+    category: 0
+    prefab: {fileID: 4177987508011303399, guid: 2db0196eb14bbf6468c15682ad7a66b5, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6DF1\u7EFF"
+    category: 0
+    prefab: {fileID: 3580414015790460619, guid: 71a504c3010e579418215b07cb4cd889, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6D45\u7EFF"
+    category: 0
+    prefab: {fileID: 5066214169306488410, guid: 01ced218b0049c24999578ca1adb9c03, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u9AD8\u5730"
+    category: 0
+    prefab: {fileID: 7962795760788246072, guid: 353edcb6cfdcdbc42b400f392a4b1bae, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u77F3\u5757"
+    category: 0
+    prefab: {fileID: 8281156885854695262, guid: 9cd6bbef34261ad408ec254dfc620943, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u704C\u6728"
+    category: 0
+    prefab: {fileID: 2939611308409989775, guid: 74bdcc9e9418c0542a992688842cf066, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6DF1\u6E0A"
+    category: 0
+    prefab: {fileID: 8142443180839270249, guid: 013dfb0fbbdfb954aaa882c807c15231, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u82B1\u8349"
+    category: 4
+    prefab: {fileID: 100100, guid: d0ce5f572db24a5b9dc5b65daa388471, type: 3}
+    surfaceDetail: 1
+    modelOnly: 0
+  - label: "\u529B\u58EB"
+    category: 1
+    prefab: {fileID: 4167539210773099687, guid: a39f6c31a6f9f6e44870c71b246ffdad, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u76D7\u8D3C"
+    category: 1
+    prefab: {fileID: 360873089128882074, guid: 3f8850312e84c0642bd7d5d3ec546018, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6CD5\u5E08"
+    category: 1
+    prefab: {fileID: 4120281927456380960, guid: 0b56b809693e39c4680113c08856df62, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u76FE\u5175"
+    category: 1
+    prefab: {fileID: 9211583146981709023, guid: 94cdedc4243fd7347955256fe4f70f5f, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u7BB1\u5B50"
+    category: 3
+    prefab: {fileID: 2108042145557017540, guid: 0c47470a4b5689f47858fe9d67541418, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u6C34\u6676"
+    category: 3
+    prefab: {fileID: 4146997819658621927, guid: 423480ef1fdace84fb7484c346da8359, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u538B\u529B\u677F"
+    category: 3
+    prefab: {fileID: 8163272067680603226, guid: e4c77ecbcc730de428a141f9cac11d64, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u95E8"
+    category: 3
+    prefab: {fileID: 3316369776769570367, guid: af28326e39270df49a29921e3a05817e, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u77F3\u95E8"
+    category: 3
+    prefab: {fileID: 1643212498266266875, guid: b9092fe3d879db5478db898836dea997, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u76EE\u6807\u70B9"
+    category: 3
+    prefab: {fileID: 7404569907292171474, guid: 9d902142a4d8aa14e859767af979dcd1, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u8FD1\u6218\u5B88\u536B"
+    category: 2
+    prefab: {fileID: 1749232764778350282, guid: e4703f9fbb0484540925e6a29417648f, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u8FDC\u7A0B\u54E8\u5175"
+    category: 2
+    prefab: {fileID: 648370711141234629, guid: 72a32bb51e505c24289a47e50b0c9ceb, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u53E4\u6728\u5996\u602A"
+    category: 2
+    prefab: {fileID: 1432588879855325502, guid: 1b8eaee6ad64798419edb9c349e1f5e4, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u8D64\u89D2\u5996\u602A"
+    category: 2
+    prefab: {fileID: 6720745946128786261, guid: 2c584edc6c81ce64eb7181b7f4d552f6, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u82D4\u77F3\u5996\u602A"
+    category: 2
+    prefab: {fileID: 5522165970240960344, guid: 32aae7e409ac4b54b934ed6efd7aca12, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u706B\u9F99\u77F3\u50CF"
+    category: 2
+    prefab: {fileID: 5155837495690632310, guid: 9379e61d79d6aee4d83baf00cc3834c5, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u796D\u575B"
+    category: 3
+    prefab: {fileID: 8579886500619146771, guid: 258734b97f3049218625ce656fb4e99f, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  - label: "\u5173\u5361\u5165\u53E3"
+    category: 3
+    prefab: {fileID: 5336477266519436359, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
+    surfaceDetail: 0
+    modelOnly: 0
+  puzzlePalette: 1

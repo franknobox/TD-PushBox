@@ -1,0 +1,5 @@
+{
+  "name": "TD.PushBox.Board",
+  "rootNamespace": "JobTest.TacticsVoxel",
+  "references": ["TD.PushBox.Runtime"]
+}
