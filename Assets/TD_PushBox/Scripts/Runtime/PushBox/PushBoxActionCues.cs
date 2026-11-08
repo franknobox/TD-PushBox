@@ -15,7 +15,7 @@ namespace TD.PushBox
             if(actor.role==PushBoxRole.Mage&&after.entities.Any(entity=>entity.id!=actorId&&entity.position==old.position
                 &&before.Find(entity.id)?.position==actor.position)) return PushBoxActionCue.Swap;
             var result=PushBoxActionCue.Footstep;
-            if(after.entities.Any(entity=>entity.kind==PushBoxKind.Crate&&entity.crushable
+            if(after.entities.Any(entity=>entity.kind==PushBoxKind.Crate
                 &&before.Find(entity.id) is PushBoxEntity prior&&prior.position!=entity.position)) result|=PushBoxActionCue.CrateDrag;
             return result;
         }

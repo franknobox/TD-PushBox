@@ -1135,6 +1135,10 @@ PrefabInstance:
       propertyPath: number
       value: 2-3
       objectReference: {fileID: 0}
+    - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
+      propertyPath: sceneGuid
+      value: c795875615012984fa75eae0bcca388f
+      objectReference: {fileID: 0}
     - target: {fileID: 5177479615244608992, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: m_Text
       value: 2-3
@@ -1963,6 +1967,10 @@ PrefabInstance:
     - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: number
       value: 2-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
+      propertyPath: sceneGuid
+      value: 8042e689a5b7178499003219dae3969b
       objectReference: {fileID: 0}
     - target: {fileID: 5177479615244608992, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: m_Text
@@ -9370,6 +9378,10 @@ PrefabInstance:
       propertyPath: number
       value: 2-2
       objectReference: {fileID: 0}
+    - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
+      propertyPath: sceneGuid
+      value: 7ee05e0e53a8fef4b89510b4dcf37292
+      objectReference: {fileID: 0}
     - target: {fileID: 5177479615244608992, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: m_Text
       value: 2-2
@@ -14152,6 +14164,10 @@ PrefabInstance:
       propertyPath: number
       value: 2-5
       objectReference: {fileID: 0}
+    - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
+      propertyPath: sceneGuid
+      value: 9787daeb409035948862b61501fd219f
+      objectReference: {fileID: 0}
     - target: {fileID: 5177479615244608992, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: m_Text
       value: 2-5
@@ -17140,6 +17156,10 @@ PrefabInstance:
     - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: number
       value: 2-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077272627893803278, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
+      propertyPath: sceneGuid
+      value: b6e983fd3ef7eaa4699cc01d990e5044
       objectReference: {fileID: 0}
     - target: {fileID: 5177479615244608992, guid: 57b3313fcf9e94c489a07b8750a87c8f, type: 3}
       propertyPath: m_Text

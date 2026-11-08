@@ -12,6 +12,7 @@ namespace JobTest.TacticsVoxel
     {
         [TestCase("石块")]
         [TestCase("灌木")]
+        [TestCase("高地")]
         public void TerrainObstaclesPreserveTheirGroundAndFollowHeightChanges(string label)
         {
             var previous=SceneManager.GetActiveScene();
@@ -46,8 +47,9 @@ namespace JobTest.TacticsVoxel
             finally {Undo.ClearAll();EditorSceneManager.CloseScene(scene,true);if(previous.IsValid()&&previous.isLoaded) SceneManager.SetActiveScene(previous);}
         }
 
-        [Test]
-        public void RectangleObstacleBrushPreservesEveryGroundTileAndSkipsActors()
+        [TestCase("石块")]
+        [TestCase("高地")]
+        public void RectangleObstacleBrushPreservesEveryGroundTileAndSkipsActors(string label)
         {
             var previous=SceneManager.GetActiveScene();
             var scene=EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Additive);SceneManager.SetActiveScene(scene);
@@ -58,7 +60,7 @@ namespace JobTest.TacticsVoxel
                 var level=TDLevelSceneFactory.Populate(scene,"ObstacleRect",new Vector2Int(3,3),palette,Entry("浅绿"));
                 var edit=new VoxelLevelEditOperations(level,palette);var ground=edit.tiles.ToDictionary(pair=>pair.Key,pair=>pair.Value);
                 edit.Place(Vector2Int.zero,Entry("力士"),0,out _);
-                Assert.That(edit.PaintRectangle(Vector2Int.zero,new Vector2Int(2,2),Entry("石块"),0,false,out string error),Is.True,error);
+                Assert.That(edit.PaintRectangle(Vector2Int.zero,new Vector2Int(2,2),Entry(label),0,false,out string error),Is.True,error);
                 foreach(var pair in ground) Assert.That(edit.tiles[pair.Key],Is.SameAs(pair.Value));
                 Assert.That(level.GetComponentsInChildren<PushBoxObject>().Length,Is.EqualTo(8));
                 Assert.That(level.GetComponentsInChildren<PushBoxActor>().Single().GridPosition,Is.EqualTo(Vector2Int.zero));

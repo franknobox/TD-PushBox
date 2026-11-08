@@ -39,6 +39,21 @@ EditorBuildSettings:
     path: Assets/TD_PushBox/Scenes/Levels/Level_09.unity
     guid: 536a6ae5260af654e995777400d3b81e
   - enabled: 1
-    path: Assets/TD_PushBox/Scenes/Levels/Level_SRPG.unity
+    path: "Assets/TD_PushBox/Scenes/Levels/Level_SRPG\u4EC5\u6F14\u793A\u4E0D\u80FD\u73A9.unity"
     guid: 39d5087bfb710464fb54d982a0597f05
+  - enabled: 1
+    path: Assets/TD_PushBox/Scenes/Levels/Level_11.unity
+    guid: 8042e689a5b7178499003219dae3969b
+  - enabled: 1
+    path: Assets/TD_PushBox/Scenes/Levels/Level_12.unity
+    guid: 7ee05e0e53a8fef4b89510b4dcf37292
+  - enabled: 1
+    path: Assets/TD_PushBox/Scenes/Levels/Level_13.unity
+    guid: c795875615012984fa75eae0bcca388f
+  - enabled: 1
+    path: Assets/TD_PushBox/Scenes/Levels/Level_14.unity
+    guid: b6e983fd3ef7eaa4699cc01d990e5044
+  - enabled: 1
+    path: Assets/TD_PushBox/Scenes/Levels/Level_15.unity
+    guid: 9787daeb409035948862b61501fd219f
   m_configObjects: {}

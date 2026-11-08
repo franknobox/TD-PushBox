@@ -154,7 +154,7 @@ namespace JobTest.TacticsVoxel
             {
                 changeObjectKey=changeEnemyKey=null;
                 if(mode==Mode.Select) return;
-                if(mode==Mode.Move) {status="请先选择石块或灌木。";return;}
+                if(mode==Mode.Move) {status="请先选择高地、石块或灌木。";return;}
             }
             if(category==VoxelPaletteCategory.Enemies) {ApplyEnemyChange(p);return;}
             if(category==VoxelPaletteCategory.Objects)

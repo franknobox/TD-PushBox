@@ -72,6 +72,7 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   footprint: {x: 1, y: 1}
   movable: 1
+  attack: 2
   startsOpen: 0
   toggleOnPress: 0
   inputs: []

@@ -10,13 +10,18 @@ namespace TD.PushBox
         [InspectorName("压力板")] Plate, [InspectorName("门")] Door, [InspectorName("目标点")] Goal, [InspectorName("敌人")] Enemy,
         [InspectorName("关卡入口")] Entrance }
 
-    public enum PushBoxAttack { [InspectorName("近身攻击")] Contact, [InspectorName("直线喷火")] DragonFire }
+    public enum PushBoxAttack { [InspectorName("近身攻击")] Contact=0, [InspectorName("直线喷火")] DragonFire=1, [InspectorName("四向远程攻击")] Ranged=2 }
     public enum PushBoxDoorRule { [InspectorName("压力板")] PressurePlates, [InspectorName("清空敌方")] AllEnemiesDefeated }
     public readonly struct PushBoxFireRay
     {
         public readonly string source;
         public readonly int cells;
         public PushBoxFireRay(string id,int count) {source=id;cells=count;}
+    }
+    public readonly struct PushBoxStrike
+    {
+        public readonly string source,target;
+        public PushBoxStrike(string source,string target) {this.source=source;this.target=target;}
     }
     [Serializable]
     public sealed class PushBoxCell
@@ -55,6 +60,7 @@ namespace TD.PushBox
         public readonly Dictionary<Vector2Int,PushBoxCell> cells=new();
         public readonly List<PushBoxEntity> entities=new();
         public readonly List<PushBoxFireRay> fireRays=new();
+        public readonly List<PushBoxStrike> strikes=new();
         public bool Failed=>entities.Any(entity=>entity.kind==PushBoxKind.Actor&&entity.dead);
         public bool Cleared
         {
@@ -74,7 +80,8 @@ namespace TD.PushBox
         {
             var result=new PushBoxState{size=size};
             foreach(var cell in cells) result.cells.Add(cell.Key,cell.Value.Copy());
-            result.entities.AddRange(entities.Select(entity=>entity.Copy()));result.fireRays.AddRange(fireRays);return result;
+            result.entities.AddRange(entities.Select(entity=>entity.Copy()));result.fireRays.AddRange(fireRays);
+            result.strikes.AddRange(strikes);return result;
         }
     }
 }

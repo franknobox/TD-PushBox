@@ -7,6 +7,26 @@ namespace TD.PushBox
 {
     public static class PushBoxRules
     {
+        private static readonly Vector2Int[] AttackDirections={Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right};
+
+        public static IEnumerable<Vector2Int> AttackCells(PushBoxState state,PushBoxEntity enemy)
+        {
+            if(enemy==null||enemy.dead||enemy.kind!=PushBoxKind.Enemy) yield break;
+            bool fire=enemy.attack==PushBoxAttack.DragonFire;
+            int range=fire?Math.Max(state.size.x,state.size.y):enemy.attack==PushBoxAttack.Ranged?2:1;
+            foreach(var direction in AttackDirections)
+            {
+                if(fire&&direction!=enemy.facing) continue;
+                for(int step=1;step<=range;step++)
+                {
+                    var p=enemy.position+direction*step;
+                    if(!state.Inside(p)) break;
+                    if(state.cells.TryGetValue(p,out var cell)&&(cell.blocksSight||cell.supports&&!cell.walkable)) break;
+                    if(state.entities.Any(item=>item!=enemy&&item.IsSolid&&item.kind!=PushBoxKind.Actor&&item.kind!=PushBoxKind.Enemy&&item.Covers(p))) break;
+                    yield return p;
+                }
+            }
+        }
         public static bool CanStand(PushBoxState state,Vector2Int p,string ignoreA=null,string ignoreB=null)=>
             state.Inside(p)&&state.cells.TryGetValue(p,out var cell)&&cell.supports&&cell.walkable&&state.SolidAt(p,ignoreA,ignoreB)==null;
 
@@ -69,26 +89,17 @@ namespace TD.PushBox
         {
             var victims=new HashSet<PushBoxEntity>();
             state.fireRays.Clear();
+            state.strikes.Clear();
             foreach(var enemy in state.entities.Where(item=>item.kind==PushBoxKind.Enemy&&!item.dead))
             {
-                if(enemy.attack==PushBoxAttack.DragonFire)
-                {
-                    var targets=new List<PushBoxEntity>();int cells=0;
-                    if(Math.Abs(enemy.facing.x)+Math.Abs(enemy.facing.y)!=1) continue;
-                    for(var p=enemy.position+enemy.facing;state.Inside(p);p+=enemy.facing)
-                    {
-                        if(state.cells.TryGetValue(p,out var cell)&&(cell.blocksSight||cell.supports&&!cell.walkable)) break;
-                        if(state.entities.Any(item=>item!=enemy&&item.IsSolid&&item.kind!=PushBoxKind.Actor&&item.kind!=PushBoxKind.Enemy&&item.Covers(p))) break;
-                        cells++;
-                        targets.AddRange(state.entities.Where(item=>item!=enemy&&!item.dead&&(item.kind==PushBoxKind.Actor||item.kind==PushBoxKind.Enemy)&&item.Covers(p)));
-                    }
-                    if(targets.Count>0) {victims.UnionWith(targets);state.fireRays.Add(new PushBoxFireRay(enemy.id,cells));}
-                    continue;
-                }
-                foreach(var target in state.entities.Where(item=>!item.dead&&item!=enemy
-                    &&(item.kind==PushBoxKind.Actor||item.kind==PushBoxKind.Enemy)))
-                    if(Math.Abs(enemy.position.x-target.position.x)+Math.Abs(enemy.position.y-target.position.y)==1)
-                    victims.Add(target);
+                var cells=AttackCells(state,enemy).ToArray();
+                var targets=state.entities.Where(item=>!item.dead&&item!=enemy
+                    &&(item.kind==PushBoxKind.Actor||item.kind==PushBoxKind.Enemy)&&cells.Any(item.Covers)).ToArray();
+                victims.UnionWith(targets);
+                if(enemy.attack!=PushBoxAttack.DragonFire)
+                    foreach(var target in targets) state.strikes.Add(new PushBoxStrike(enemy.id,target.id));
+                if(enemy.attack==PushBoxAttack.DragonFire&&targets.Length>0)
+                    state.fireRays.Add(new PushBoxFireRay(enemy.id,cells.Length));
             }
             foreach(var victim in victims) victim.dead=true;
         }

@@ -144,6 +144,62 @@ namespace TD.PushBox.Tests
         {var dragon=new PushBoxEntity{id="dragon",kind=PushBoxKind.Enemy,attack=PushBoxAttack.DragonFire,position=point,facing=facing,movable=true};state.entities.Add(dragon);return dragon;}
 
         [Test]
+        public void EnemyStrikesRecordTheActualAttackerAndCopyWithoutSharingTheList()
+        {
+            var state=Board(PushBoxRole.Shield);
+            state.entities.Add(new PushBoxEntity{id="guard",kind=PushBoxKind.Enemy,position=new Vector2Int(3,2)});
+            PushBoxRules.ResolveContacts(state);
+            Assert.That(state.strikes.Count,Is.EqualTo(1));
+            Assert.That(state.strikes[0].source,Is.EqualTo("guard"));Assert.That(state.strikes[0].target,Is.EqualTo("actor"));
+            var copy=state.Copy();state.strikes.Clear();Assert.That(copy.strikes.Count,Is.EqualTo(1));
+        }
+
+        [Test]
+        public void DoorDeathAndDragonFireDoNotProduceMeleeStrikes()
+        {
+            var state=DoorCrate(true);state.Find("actor").dead=true;
+            state.entities.Add(new PushBoxEntity{id="guard",kind=PushBoxKind.Enemy,position=new Vector2Int(3,2)});
+            PushBoxRules.ResolveContacts(state);Assert.That(state.strikes,Is.Empty);
+            state=Board(PushBoxRole.Shield);Dragon(state,new Vector2Int(6,2),Vector2Int.left);
+            PushBoxRules.ResolveContacts(state);Assert.That(state.Find("actor").dead,Is.True);Assert.That(state.strikes,Is.Empty);
+        }
+
+        [Test]
+        public void SentryAttacksTwoCellsInCardinalDirectionsButNotDiagonalsOrThirdCell()
+        {
+            foreach(var point in new[]{new Vector2Int(4,2),new Vector2Int(3,3),new Vector2Int(5,2)})
+            {
+                var state=Board(PushBoxRole.Shield);state.Find("actor").position=point;
+                var enemy=new PushBoxEntity{id="sentry",kind=PushBoxKind.Enemy,attack=PushBoxAttack.Ranged,position=new Vector2Int(2,2)};
+                state.entities.Add(enemy);PushBoxRules.ResolveContacts(state);
+                Assert.That(state.Find("actor").dead,Is.EqualTo(point==new Vector2Int(4,2)));
+            }
+        }
+
+        [Test]
+        public void AttackCellsStopBeforeObstaclesAndReflectOpenDoorsAndDeath()
+        {
+            var state=Board(PushBoxRole.Shield);var dragon=Dragon(state,new Vector2Int(6,2),Vector2Int.left);
+            var door=new PushBoxEntity{id="door",kind=PushBoxKind.Door,position=new Vector2Int(4,2)};state.entities.Add(door);
+            CollectionAssert.AreEqual(new[]{new Vector2Int(5,2)},PushBoxRules.AttackCells(state,dragon));
+            door.open=true;Assert.That(System.Linq.Enumerable.Count(PushBoxRules.AttackCells(state,dragon)),Is.EqualTo(6));
+            dragon.dead=true;Assert.That(PushBoxRules.AttackCells(state,dragon),Is.Empty);
+        }
+
+        [Test]
+        public void SentryCannotShootThroughCrateButCharactersDoNotBlockItsRange()
+        {
+            var state=Board(PushBoxRole.Shield);state.Find("actor").position=new Vector2Int(4,2);
+            var enemy=new PushBoxEntity{id="sentry",kind=PushBoxKind.Enemy,attack=PushBoxAttack.Ranged,position=new Vector2Int(2,2)};
+            state.entities.Add(enemy);Box(state,new Vector2Int(3,2));
+            PushBoxRules.ResolveContacts(state);Assert.That(state.Find("actor").dead,Is.False);
+            state.Find("box").dead=true;
+            state.entities.Add(new PushBoxEntity{id="guard",kind=PushBoxKind.Enemy,position=new Vector2Int(3,2)});
+            PushBoxRules.ResolveContacts(state);
+            Assert.That(state.Find("actor").dead&&state.Find("guard").dead&&enemy.dead,Is.True);
+        }
+
+        [Test]
         public void DragonHitsBothTeamsAlongItsFacingAndDoesNotAttackItsSides()
         {
             var state=Board(PushBoxRole.Shield);state.Find("actor").position=new Vector2Int(1,2);
@@ -284,11 +340,11 @@ namespace TD.PushBox.Tests
         }
 
         [Test]
-        public void MovingCrystalDoesNotProduceWoodenCrateSound()
+        public void MovingCrystalUsesTheCrateSound()
         {
             var state=Board(PushBoxRole.Warrior);Box(state,new Vector2Int(3,2)).crushable=false;
             var before=state.Copy();Assert.That(PushBoxRules.TryMove(state,"actor",Vector2Int.right,out _),Is.True);
-            Assert.That(PushBoxActionCues.Classify(before,state,"actor"),Is.EqualTo(PushBoxActionCue.Footstep));
+            Assert.That(PushBoxActionCues.Classify(before,state,"actor"),Is.EqualTo(PushBoxActionCue.Footstep|PushBoxActionCue.CrateDrag));
         }
 
         [Test]

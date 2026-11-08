@@ -13,7 +13,7 @@
 
 统一资源目录为 `Data/Authoring/PushBoxPalette.asset`。标签用于中文界面，玩法身份用组件、类型和稳定 ID，不用标签字符串判断单位能力。
 
-地形画笔区分真正的 Tile 与 `Entry.IsTerrainObject`：高地替换地块；石块、灌木作为 Blocker 叠放，不删除原地面。矩形跳过不能占用的格子，不挤走实体。
+地形画笔区分真正的 Tile 与 `Entry.IsTerrainObject`：地面使用 Tile；高地、石块、灌木作为 Blocker 叠放，不删除原地面。矩形跳过不能占用的格子，不挤走实体。
 
 对应代码：[创建工厂](../../TD_PushBox/Scripts/Editor/Authoring/TDLevelSceneFactory.cs)、[编辑窗口](../../TD_PushBox/Scripts/Editor/Authoring/VoxelLevelWindow.cs)、[编辑操作](../../TD_PushBox/Scripts/Editor/Authoring/VoxelLevelEditOperations.cs)。
 

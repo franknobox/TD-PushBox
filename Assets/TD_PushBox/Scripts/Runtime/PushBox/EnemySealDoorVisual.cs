@@ -51,6 +51,7 @@ namespace TD.PushBox
         {
             IsAnimating=true;slab.gameObject.SetActive(true);slab.localPosition=rest;SetSeal(true);
             yield return new WaitForSecondsRealtime(1);
+            GetComponentInParent<PushBoxActionAudio>()?.PlatePress();
             float elapsed=0;
             while(elapsed<0.32f)
             {elapsed+=Time.unscaledDeltaTime;slab.localPosition=rest+Vector3.down*sinkDistance*Mathf.SmoothStep(0,1,Mathf.Clamp01(elapsed/0.32f));yield return null;}

@@ -43,7 +43,7 @@ MonoBehaviour:
     modelOnly: 0
   - label: "\u9AD8\u5730"
     category: 0
-    prefab: {fileID: 7962795760788246072, guid: 353edcb6cfdcdbc42b400f392a4b1bae, type: 3}
+    prefab: {fileID: 8281156885854695262, guid: 50f7a1b2d36841daab03028890a5c78d, type: 3}
     surfaceDetail: 0
     modelOnly: 0
   - label: "\u77F3\u5757"

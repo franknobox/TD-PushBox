@@ -166,7 +166,7 @@ namespace TD.PushBox
                 }
                 yield return null;
             }
-            yield return PlayCrushing(before,after);yield return PlayFire(after);Present(true);
+            yield return PlayCrushing(before,after);yield return PlayStrikes(after);yield return PlayFire(after);Present(true);
             if(after.entities.Any(entity=>entity.kind==PushBoxKind.Plate
                 &&before.Find(entity.id) is PushBoxEntity oldPlate&&oldPlate.pressed!=entity.pressed))
                 actionAudio.PlatePress();
@@ -178,7 +178,7 @@ namespace TD.PushBox
         }
         private IEnumerator OpeningFire()
         {
-            busy=true;yield return PlayCrushing(initial,session.State);yield return PlayFire(session.State);Present(true);
+            busy=true;yield return PlayCrushing(initial,session.State);yield return PlayStrikes(session.State);yield return PlayFire(session.State);Present(true);
             if(session.State.Failed) actionAudio.Death();
             while(objects.Any(item=>item.IsDoorAnimating)) yield return null;
             if(session.State.Cleared) actionAudio.Clear();
@@ -193,6 +193,28 @@ namespace TD.PushBox
             actionAudio.Crush();
             yield return new WaitForSecondsRealtime(0.3f);
             foreach(var item in crushed) item.Present(after.Find(item.StableId));
+        }
+        private IEnumerator PlayStrikes(PushBoxState state)
+        {
+            var lunges=new List<(Transform body,Vector3 origin,Vector3 offset)>();
+            foreach(var group in state.strikes.Where(hit=>state.Find(hit.target)?.kind==PushBoxKind.Actor).GroupBy(hit=>hit.source))
+            {
+                if(!bodies.TryGetValue(group.Key,out var body)||body==null) continue;
+                var source=state.Find(group.Key);
+                var hit=group.OrderBy(item=>(state.Find(item.target).position-source.position).sqrMagnitude).First();
+                var direction=Vector3.ProjectOnPlane(level.Surface(state.Find(hit.target).position)-body.position,level.transform.up);
+                lunges.Add((body,body.position,direction.normalized*Mathf.Min(level.CellSize*0.3f,direction.magnitude*0.4f)));
+            }
+            if(lunges.Count==0) yield break;
+            float elapsed=0;
+            while(elapsed<0.18f)
+            {
+                elapsed+=Time.unscaledDeltaTime;float t=Mathf.Clamp01(elapsed/0.18f);
+                float reach=t<0.4f?Mathf.SmoothStep(0,1,t/0.4f):Mathf.SmoothStep(1,0,(t-0.4f)/0.6f);
+                foreach(var lunge in lunges) lunge.body.position=lunge.origin+lunge.offset*reach;
+                yield return null;
+            }
+            foreach(var lunge in lunges) lunge.body.position=lunge.origin;
         }
         private IEnumerator PlayFire(PushBoxState state)
         {

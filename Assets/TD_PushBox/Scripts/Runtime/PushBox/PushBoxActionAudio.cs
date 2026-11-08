@@ -8,7 +8,7 @@ namespace TD.PushBox
         [SerializeField,InspectorName("音效配置")] private PushBoxAudioLibrary library;
         [SerializeField,InspectorName("总音量"),Range(0,1)] private float volume=0.8f;
         [SerializeField,InspectorName("脚步音量"),Range(0,1)] private float footstepVolume=0.55f;
-        [SerializeField,InspectorName("木箱移动音量"),Range(0,1)] private float crateVolume=0.55f;
+        [SerializeField,InspectorName("箱子/水晶移动音量"),Range(0,1)] private float crateVolume=0.55f;
         [SerializeField,InspectorName("换位音量"),Range(0,1)] private float swapVolume=0.55f;
         private AudioSource steps;
         private AudioSource magic;

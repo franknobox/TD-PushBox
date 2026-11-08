@@ -7,12 +7,13 @@ namespace TD.PushBox.Tests
     public sealed class LevelRunRouteTests
     {
         [Test]
-        public void RouteUsesNumericOrderAndOnlyConfiguredChapterOneEntries()
+        public void RouteUsesNumericChapterAndLevelOrderForConfiguredEntries()
         {
             var route=LevelRunRoute.Sort(new[]{new LevelRunStep("1-10","Ten"),new LevelRunStep("1-2","Two"),
                 new LevelRunStep("1-1","One"),new LevelRunStep("2-1","Other"),new LevelRunStep("1-3",null),
                 new LevelRunStep("abc","Invalid"),new LevelRunStep("1-0","Zero")});
-            CollectionAssert.AreEqual(new[]{"1-1","1-2","1-10"},route.Select(step=>step.number));
+            CollectionAssert.AreEqual(new[]{"1-1","1-2","1-10","2-1"},route.Select(step=>step.number));
+            Assert.That(LevelRunRoute.Next(route,"1-10","Ten").number,Is.EqualTo("2-1"));
         }
 
         [Test]
